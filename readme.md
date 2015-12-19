@@ -1,6 +1,6 @@
 # resolve-pkg [![Build Status](https://travis-ci.org/sindresorhus/resolve-pkg.svg?branch=master)](https://travis-ci.org/sindresorhus/resolve-pkg)
 
-> Resolve the path of a package regardless of it having an entry
+> Resolve the path of a package regardless of it having an entry point
 
 Some packages like CLI tools and grunt tasks don't have a entry point, like `"main": "foo.js"` in package.json, resulting in them not being resolvable by `require.resolve()`. Unlike `require.resolve()`, this module also resolves packages without an entry point, returns `null` instead of throwing when the module can't be found, and resolves from `process.cwd()` instead `__dirname` by default.
 
