@@ -42,7 +42,7 @@ What you would use in `require()`.
 
 ##### cwd
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `process.cwd()`
 
 Directory to resolve from.
@@ -59,4 +59,4 @@ Directory to resolve from.
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
