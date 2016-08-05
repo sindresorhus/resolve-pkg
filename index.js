@@ -5,11 +5,12 @@ var resolveFrom = require('resolve-from');
 module.exports = function (moduleId, opts) {
 	opts = opts || {};
 
-	var parts = moduleId.split(path.sep);
+	var parts = moduleId.replace(/\\/g, '/').split('/');
 	var packageName = '';
 
-	if (parts.length > 0 && parts[0].indexOf('@') === 0) {
-		packageName += parts.shift() + path.sep;
+	// handle scoped package name
+	if (parts.length > 0 && parts[0][0] === '@') {
+		packageName += parts.shift() + '/';
 	}
 
 	packageName += parts.shift();
@@ -21,5 +22,5 @@ module.exports = function (moduleId, opts) {
 		return null;
 	}
 
-	return path.join(path.dirname(resolved), parts.join(path.sep));
+	return path.join(path.dirname(resolved), parts.join('/'));
 };
