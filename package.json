@@ -41,6 +41,7 @@
   "devDependencies": {
     "ava": "*",
     "grunt-svgmin": "3.1.0",
-    "xo": "*"
+    "xo": "*",
+    "@someprivate/module-test": "file:./fixtures/private-module-test"
   }
 }

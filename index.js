@@ -6,7 +6,15 @@ module.exports = function (moduleId, opts) {
 	opts = opts || {};
 
 	var parts = moduleId.split(path.sep);
-	var pkg = path.join(parts.shift(), 'package.json');
+	var packageName = '';
+
+	if (parts.length > 0 && parts[0].indexOf('@') === 0) {
+		packageName += parts.shift() + path.sep;
+	}
+
+	packageName += parts.shift();
+
+	var pkg = path.join(packageName, 'package.json');
 	var resolved = resolveFrom(opts.cwd || '.', pkg);
 
 	if (!resolved) {
