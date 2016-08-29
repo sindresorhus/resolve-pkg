@@ -4,6 +4,7 @@ var resolveFrom = require('resolve-from');
 
 module.exports = function (moduleId, opts) {
 	opts = opts || {};
+	opts.cwd = opts.cwd || '.';
 
 	var parts = moduleId.replace(/\\/g, '/').split('/');
 	var packageName = '';
@@ -16,7 +17,7 @@ module.exports = function (moduleId, opts) {
 	packageName += parts.shift();
 
 	var pkg = path.join(packageName, 'package.json');
-	var resolved = resolveFrom(opts.cwd || '.', pkg);
+	var resolved = resolveFrom(opts.cwd, pkg);
 
 	if (!resolved) {
 		return null;
