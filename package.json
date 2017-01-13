@@ -10,7 +10,7 @@
     "url": "sindresorhus.com"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
     "test": "xo && ava"
@@ -39,9 +39,9 @@
     "resolve-from": "^2.0.0"
   },
   "devDependencies": {
+    "@someprivate/module-test": "file:./fixtures/private-module-test",
     "ava": "*",
-    "grunt-svgmin": "3.3.0",
-    "xo": "*",
-    "@someprivate/module-test": "file:./fixtures/private-module-test"
+    "grunt-svgmin": "^4.0.0",
+    "xo": "*"
   }
 }

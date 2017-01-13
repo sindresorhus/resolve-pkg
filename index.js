@@ -1,22 +1,22 @@
 'use strict';
-var path = require('path');
-var resolveFrom = require('resolve-from');
+const path = require('path');
+const resolveFrom = require('resolve-from');
 
-module.exports = function (moduleId, opts) {
+module.exports = (moduleId, opts) => {
 	opts = opts || {};
 
-	var parts = moduleId.replace(/\\/g, '/').split('/');
-	var packageName = '';
+	const parts = moduleId.replace(/\\/g, '/').split('/');
+	let packageName = '';
 
-	// handle scoped package name
+	// Handle scoped package name
 	if (parts.length > 0 && parts[0][0] === '@') {
 		packageName += parts.shift() + '/';
 	}
 
 	packageName += parts.shift();
 
-	var pkg = path.join(packageName, 'package.json');
-	var resolved = resolveFrom(opts.cwd || '.', pkg);
+	const pkg = path.join(packageName, 'package.json');
+	const resolved = resolveFrom(opts.cwd || process.cwd(), pkg);
 
 	if (!resolved) {
 		return null;

@@ -22,7 +22,7 @@ const resolvePkg = require('resolve-pkg');
 resolvePkg('grunt-svgmin/tasks', {cwd: __dirname});
 //=> '/Users/sindresorhus/unicorn/node_modules/grunt-svgmin/tasks'
 
-// fails here as grunt tasks usually don't have a defined main entry point
+// Fails here as Grunt tasks usually don't have a defined main entry point
 require.resolve('grunt-svgmin/tasks');
 //=> Error: Cannot find module 'grunt-svgmin'
 ```
