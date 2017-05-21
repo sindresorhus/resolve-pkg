@@ -52,9 +52,9 @@ Directory to resolve from.
 
 - [resolve-cwd](https://github.com/sindresorhus/resolve-cwd) - Resolve the path of a module from the current working directory
 - [resolve-from](https://github.com/sindresorhus/resolve-from) - Resolve the path of a module from a given path
-- [req-from](https://github.com/sindresorhus/req-from) - Require a module from a given path
-- [req-cwd](https://github.com/sindresorhus/req-cwd) - Require a module from the current working directory
-- [lazy-req](https://github.com/sindresorhus/lazy-req) - Require modules lazily
+- [import-from](https://github.com/sindresorhus/import-from) - Import a module from a given path
+- [import-cwd](https://github.com/sindresorhus/import-cwd) - Import a module from the current working directory
+- [import-lazy](https://github.com/sindresorhus/import-lazy) - Import a module lazily
 
 
 ## License
