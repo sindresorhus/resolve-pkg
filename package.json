@@ -1,47 +1,49 @@
 {
-  "name": "resolve-pkg",
-  "version": "1.0.0",
-  "description": "Resolve the path of a package regardless of it having an entry point",
-  "license": "MIT",
-  "repository": "sindresorhus/resolve-pkg",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=4"
-  },
-  "scripts": {
-    "test": "xo && ava"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "require",
-    "resolve",
-    "path",
-    "module",
-    "from",
-    "like",
-    "path",
-    "cwd",
-    "current",
-    "working",
-    "directory",
-    "grunt",
-    "main",
-    "entry",
-    "point"
-  ],
-  "dependencies": {
-    "resolve-from": "^2.0.0"
-  },
-  "devDependencies": {
-    "@someprivate/module-test": "file:./fixtures/private-module-test",
-    "ava": "*",
-    "grunt-svgmin": "^4.0.0",
-    "xo": "*"
-  }
+	"name": "resolve-pkg",
+	"version": "1.0.0",
+	"description": "Resolve the path of a package regardless of it having an entry point",
+	"license": "MIT",
+	"repository": "sindresorhus/resolve-pkg",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"test": "xo && ava && tsd"
+	},
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
+	"keywords": [
+		"require",
+		"resolve",
+		"path",
+		"module",
+		"from",
+		"like",
+		"path",
+		"cwd",
+		"current",
+		"working",
+		"directory",
+		"grunt",
+		"main",
+		"entry",
+		"point"
+	],
+	"dependencies": {
+		"resolve-from": "^5.0.0"
+	},
+	"devDependencies": {
+		"@someprivate/module-test": "file:./fixtures/private-module-test",
+		"ava": "^1.4.1",
+		"grunt-svgmin": "^6.0.0",
+		"tsd": "^0.7.2",
+		"xo": "^0.24.0"
+	}
 }
