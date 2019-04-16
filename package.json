@@ -13,8 +13,8 @@
 		"node": ">=8"
 	},
 	"scripts": {
-		"test": "xo && ava && tsd",
-		"postinstall": "del node_modules/@someprivate/module-test && make-dir node_modules/@someprivate/module-test && cpy 'fixtures/private-module-test/*' node_modules/@someprivate/module-test/"
+		"pretest": "del node_modules/@someprivate/module-test && make-dir node_modules/@someprivate/module-test && cpy 'fixtures/private-module-test/*' node_modules/@someprivate/module-test/",
+		"test": "xo && ava && tsd"
 	},
 	"files": [
 		"index.js",
