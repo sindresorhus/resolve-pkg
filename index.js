@@ -2,9 +2,7 @@
 const path = require('path');
 const resolveFrom = require('resolve-from');
 
-module.exports = (moduleId, opts) => {
-	opts = opts || {};
-
+module.exports = (moduleId, options = {}) => {
 	const parts = moduleId.replace(/\\/g, '/').split('/');
 	let packageName = '';
 
@@ -15,11 +13,11 @@ module.exports = (moduleId, opts) => {
 
 	packageName += parts.shift();
 
-	const pkg = path.join(packageName, 'package.json');
-	const resolved = resolveFrom(opts.cwd || process.cwd(), pkg);
+	const packageJson = path.join(packageName, 'package.json');
+	const resolved = resolveFrom.silent(options.cwd || process.cwd(), packageJson);
 
 	if (!resolved) {
-		return null;
+		return;
 	}
 
 	return path.join(path.dirname(resolved), parts.join('/'));

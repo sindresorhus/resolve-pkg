@@ -2,13 +2,13 @@
 
 > Resolve the path of a package regardless of it having an entry point
 
-Some packages like CLI tools and grunt tasks don't have a entry point, like `"main": "foo.js"` in package.json, resulting in them not being resolvable by `require.resolve()`. Unlike `require.resolve()`, this module also resolves packages without an entry point, returns `null` instead of throwing when the module can't be found, and resolves from `process.cwd()` instead `__dirname` by default.
+Some packages like CLI tools and grunt tasks don't have a entry point, like `"main": "foo.js"` in package.json, resulting in them not being resolvable by `require.resolve()`. Unlike `require.resolve()`, this module also resolves packages without an entry point, returns `undefined` instead of throwing when the module can't be found, and resolves from `process.cwd()` instead `__dirname` by default.
 
 
 ## Install
 
 ```
-$ npm install --save resolve-pkg
+$ npm install resolve-pkg
 ```
 
 
@@ -42,7 +42,7 @@ What you would use in `require()`.
 
 ##### cwd
 
-Type: `boolean`<br>
+Type: `string`<br>
 Default: `process.cwd()`
 
 Directory to resolve from.
