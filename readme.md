@@ -1,4 +1,4 @@
-# resolve-pkg [![Build Status](https://travis-ci.org/sindresorhus/resolve-pkg.svg?branch=master)](https://travis-ci.org/sindresorhus/resolve-pkg)
+# resolve-pkg
 
 > Resolve the path of a package regardless of it having an entry point
 
