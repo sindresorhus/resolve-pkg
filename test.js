@@ -1,12 +1,13 @@
-import path from 'path';
+import path from 'node:path';
 import test from 'ava';
-import resolvePkg from '.';
+import resolvePackage from './index.js';
 
 test('main', t => {
-	t.is(resolvePkg('nonexistent'), undefined);
-	t.is(resolvePkg('nonexistent/foo'), undefined);
-	t.is(path.relative('.', resolvePkg('grunt-svgmin')), 'node_modules/grunt-svgmin');
-	t.is(path.relative('.', resolvePkg('grunt-svgmin/tasks')), 'node_modules/grunt-svgmin/tasks');
-	t.is(path.relative('.', resolvePkg('@someprivate/module-test')), 'node_modules/@someprivate/module-test');
-	t.is(path.relative('.', resolvePkg('@someprivate/module-test/subdir')), 'node_modules/@someprivate/module-test/subdir');
+	t.is(resolvePackage('nonexistent'), undefined);
+	t.is(resolvePackage('nonexistent/foo'), undefined);
+	t.is(path.relative('.', resolvePackage('grunt-svgmin')), 'node_modules/grunt-svgmin');
+	t.is(path.relative('.', resolvePackage('grunt-svgmin/tasks')), 'node_modules/grunt-svgmin/tasks');
+	t.is(path.relative('.', resolvePackage('@someprivate/module-test')), 'node_modules/@someprivate/module-test');
+	t.is(path.relative('.', resolvePackage('@someprivate/module-test/subdir')), 'node_modules/@someprivate/module-test/subdir');
+	t.is(path.relative('.', resolvePackage('is-safe-filename')), 'node_modules/is-safe-filename');
 });

@@ -1,5 +1,5 @@
 import {expectType} from 'tsd';
-import resolvePkg = require('.');
+import resolvePackage from './index.js';
 
-expectType<string | undefined>(resolvePkg('hello'));
-expectType<string | undefined>(resolvePkg('hello', {cwd: '.'}));
+expectType<string | undefined>(resolvePackage('hello'));
+expectType<string | undefined>(resolvePackage('hello', {cwd: '.'}));
