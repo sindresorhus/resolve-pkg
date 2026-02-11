@@ -2,52 +2,73 @@ import path from 'node:path';
 import process from 'node:process';
 import fs from 'node:fs';
 import {createRequire} from 'node:module';
+import {findUpSync} from 'find-up-simple';
 
-function findPackageDirectory(require, packageName) {
-	// Try resolving package.json directly (works when `exports` doesn't block it)
+function isBarePackageName(packageName) {
+	return Boolean(packageName) && packageName[0] !== '.';
+}
+
+function resolveIfExists(require, moduleId) {
 	try {
-		return path.dirname(require.resolve(path.join(packageName, 'package.json')));
+		return require.resolve(moduleId);
 	} catch {}
+}
 
-	// For packages with `exports` that don't expose `./package.json`,
-	// resolve the package entry point and walk up to find the package root.
-	let resolved;
+function readPackageName(directory) {
 	try {
-		resolved = require.resolve(packageName);
-	} catch {
-		return;
+		const packageJson = JSON.parse(fs.readFileSync(path.join(directory, 'package.json'), 'utf8'));
+		return packageJson.name;
+	} catch {}
+}
+
+function findPackageDirectory(require, packageName, cwd) {
+	const packageJsonPath = resolveIfExists(require, path.join(packageName, 'package.json'));
+	if (packageJsonPath) {
+		return path.dirname(packageJsonPath);
 	}
 
-	let directory = path.dirname(resolved);
-	const {root} = path.parse(directory);
+	const resolvedModule = resolveIfExists(require, packageName);
+	if (resolvedModule && path.isAbsolute(resolvedModule)) {
+		const nodeModulesPackagePath = path.join('node_modules', ...packageName.split('/'));
+		let directory = path.dirname(resolvedModule);
 
-	while (directory !== root) {
-		const packageJsonPath = path.join(directory, 'package.json');
-		if (fs.existsSync(packageJsonPath)) {
-			const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-			if (packageJson.name === packageName) {
+		while (true) {
+			if (directory.endsWith(nodeModulesPackagePath) || readPackageName(directory) === packageName) {
 				return directory;
 			}
-		}
 
-		directory = path.dirname(directory);
+			const parentDirectory = path.dirname(directory);
+			if (parentDirectory === directory) {
+				break;
+			}
+
+			directory = parentDirectory;
+		}
 	}
+
+	const packageJsonPathFromNodeModules = findUpSync(path.join('node_modules', ...packageName.split('/'), 'package.json'), {cwd});
+	return packageJsonPathFromNodeModules && path.dirname(packageJsonPathFromNodeModules);
 }
 
 export default function resolvePackage(moduleId, {cwd = process.cwd()} = {}) {
 	const parts = moduleId.replaceAll('\\', '/').split('/');
-	let packageName = '';
+	let packageName = parts.shift();
 
-	// Handle scoped package name
-	if (parts.length > 0 && parts[0][0] === '@') {
-		packageName += parts.shift() + '/';
+	if (packageName?.[0] === '@') {
+		const subPackageName = parts.shift();
+		if (!subPackageName) {
+			return;
+		}
+
+		packageName = `${packageName}/${subPackageName}`;
 	}
 
-	packageName += parts.shift();
+	if (!isBarePackageName(packageName)) {
+		return;
+	}
 
 	const require = createRequire(path.resolve(cwd, 'noop.js'));
-
-	const packageDirectory = findPackageDirectory(require, packageName);
+	const packageDirectory = findPackageDirectory(require, packageName, cwd);
 	if (!packageDirectory) {
 		return;
 	}

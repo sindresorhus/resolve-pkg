@@ -1,0 +1,7 @@
+{
+	"name": "original-pkg-name",
+	"version": "0.0.0",
+	"exports": {
+		".": "./index.js"
+	}
+}

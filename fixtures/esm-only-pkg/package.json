@@ -1,0 +1,10 @@
+{
+	"name": "esm-only-pkg",
+	"version": "0.0.0",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./index.js"
+		}
+	}
+}

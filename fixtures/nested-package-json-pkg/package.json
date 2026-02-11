@@ -1,0 +1,9 @@
+{
+	"name": "nested-package-json-pkg",
+	"version": "0.0.0",
+	"type": "module",
+	"main": "./dist/index.js",
+	"exports": {
+		".": "./dist/index.js"
+	}
+}
