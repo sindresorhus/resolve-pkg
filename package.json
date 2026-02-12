@@ -1,6 +1,6 @@
 {
 	"name": "resolve-pkg",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Resolve the path of a package regardless of it having an entry point",
 	"license": "MIT",
 	"repository": "sindresorhus/resolve-pkg",
